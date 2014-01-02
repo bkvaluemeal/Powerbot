@@ -23,11 +23,11 @@ public class Scavenger extends PollingScript {
 	@Override
 	public int poll() {
 		for (Task task : taskList) {
-            if(task.validate()) {
-            	task.execute();
-                return Random.nextInt(250, 375);
-            }
-        }
+			if(task.validate()) {
+				task.execute();
+				return Random.nextInt(250, 375);
+			}
+		}
 		return 0;
 	}
 	

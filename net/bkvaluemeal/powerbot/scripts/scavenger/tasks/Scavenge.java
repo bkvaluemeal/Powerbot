@@ -21,12 +21,24 @@ public class Scavenge extends Task {
 	public void execute() {
 		GroundItem item = ctx.groundItems.nearest().poll();
 		
-		if(item.isOnScreen()) {
-			item.interact("Take");
-			sleep(500);
-		} else {
-			ctx.movement.stepTowards(item);
-			ctx.camera.turnTo(item);
+		while(ctx.movement.isReachable(ctx.players.local().getLocation(), item.getLocation())
+				&& item.isValid()) {
+			if(item.isOnScreen()) {
+				if(item.interact("Take")) {
+					sleep(500);
+					while(ctx.players.local().isInMotion()) {
+						sleep(500);
+					}
+				}
+			} else {
+				if(ctx.movement.stepTowards(item)) {
+					sleep(500);
+					while(ctx.players.local().isInMotion()) {
+						sleep(500);
+					}
+				}
+				ctx.camera.turnTo(item);
+			}
 		}
 	}
 	
