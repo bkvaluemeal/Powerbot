@@ -1,11 +1,16 @@
 package net.bkvaluemeal.powerbot.scripts.scavenger.tasks;
 
-import org.powerbot.script.methods.MethodContext;
-import org.powerbot.script.wrappers.GroundItem;
+import java.util.ArrayList;
 
 import net.bkvaluemeal.powerbot.util.Task;
 
+import org.powerbot.script.lang.Filter;
+import org.powerbot.script.methods.MethodContext;
+import org.powerbot.script.wrappers.GroundItem;
+
 public class Scavenge extends Task {
+	
+	public static ArrayList<Integer> badItems = new ArrayList<>();
 	
 	public Scavenge(MethodContext ctx) {
 		super(ctx);
@@ -20,7 +25,19 @@ public class Scavenge extends Task {
 	
 	@Override
 	public void execute() {
-		GroundItem item = ctx.groundItems.nearest().poll();
+		GroundItem item = ctx.groundItems.select(new Filter<GroundItem>() {
+			
+			@Override
+			public boolean accept(GroundItem i) {
+				for(int badItem : badItems) {
+					if(i.getId() == badItem) {
+						return false;
+					}
+				}
+				return true;
+			}
+			
+		}).nearest().poll();
 		long startTime = System.currentTimeMillis();
 		
 		while(ctx.movement.isReachable(ctx.players.local().getLocation(), item.getLocation())

@@ -17,6 +17,7 @@ public class Scavenger extends PollingScript {
 	
 	@Override
 	public void start() {
+		Scavenge.badItems.add(15412);
 		taskList.add(new Scavenge(ctx));
 		taskList.add(new ToBank(ctx));
 		taskList.add(new Bank(ctx));
