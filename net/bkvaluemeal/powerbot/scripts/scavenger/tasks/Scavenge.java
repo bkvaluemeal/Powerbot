@@ -2,6 +2,7 @@ package net.bkvaluemeal.powerbot.scripts.scavenger.tasks;
 
 import java.util.ArrayList;
 
+import net.bkvaluemeal.powerbot.scripts.scavenger.Scavenger;
 import net.bkvaluemeal.powerbot.util.Task;
 
 import org.powerbot.script.lang.Filter;
@@ -25,6 +26,7 @@ public class Scavenge extends Task {
 	
 	@Override
 	public void execute() {
+		Scavenger.status = "Scavenging";
 		GroundItem item = ctx.groundItems.select(new Filter<GroundItem>() {
 			
 			@Override

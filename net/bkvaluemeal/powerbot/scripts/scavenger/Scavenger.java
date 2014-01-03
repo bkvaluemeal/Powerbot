@@ -26,6 +26,8 @@ public class Scavenger extends PollingScript implements PaintListener {
 	private long runTime = 0L;
 	private int count = 0;
 	private int lastCount = 0;
+	public static int profit = 0;
+	public static String status = "Starting up";
 	
 	@Override
 	public void start() {
@@ -69,6 +71,18 @@ public class Scavenger extends PollingScript implements PaintListener {
 		return count;
 	}
 	
+	private String profit() {
+		if(status.equals("Updating profit")) {
+			return "";
+		}
+		
+		if(profit == 0) {
+			return profit + " gp";
+		} else {
+			return "~" + profit + " gp";
+		}
+	}
+	
 	@Override
 	public void repaint(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
@@ -84,6 +98,8 @@ public class Scavenger extends PollingScript implements PaintListener {
 		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 		g.drawString("Time: " + time(), 135, 25);
 		g.drawString("Count: " + count(), 135, 40);
+		g.drawString("Profit: " + profit(), 135, 55);
+		g.drawString("Status: " + status, 135, 85);
 		
 		/* Mouse */
 		g.drawLine(mouse.x, mouse.y - 5, mouse.x, mouse.y + 5);
