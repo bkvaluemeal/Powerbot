@@ -24,6 +24,8 @@ public class Scavenger extends PollingScript implements PaintListener {
 	private ArrayList<Task> taskList = new ArrayList<>();
 	private final long startTime = System.currentTimeMillis();
 	private long runTime = 0L;
+	private int count = 0;
+	private int lastCount = 0;
 	
 	@Override
 	public void start() {
@@ -44,16 +46,27 @@ public class Scavenger extends PollingScript implements PaintListener {
 		return Random.nextInt(250, 375);
 	}
 	
-	String time() {
-		if (ctx.game.isLoggedIn()) {
-			runTime = System.currentTimeMillis() - startTime;
-		}
+	private String time() {
+		runTime = System.currentTimeMillis() - startTime;
 		
 		long second = (runTime / 1000) % 60;
 		long minute = (runTime / (1000 * 60)) % 60;
 		long hour = (runTime / (1000 * 60 * 60)) % 24;
 		
 		return String.format("%02d:%02d:%02d", hour, minute, second);
+	}
+	
+	private int count() {
+		int inventory = ctx.backpack.select().count();
+		
+		if(inventory == 0) {
+			lastCount = 0;
+		}
+		
+		count = (inventory - lastCount) + count;
+		lastCount = inventory;
+		
+		return count;
 	}
 	
 	@Override
@@ -70,6 +83,7 @@ public class Scavenger extends PollingScript implements PaintListener {
 		g.drawImage(MW2Scavenger, 0, 0, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 		g.drawString("Time: " + time(), 135, 25);
+		g.drawString("Count: " + count(), 135, 40);
 		
 		/* Mouse */
 		g.drawLine(mouse.x, mouse.y - 5, mouse.x, mouse.y + 5);
