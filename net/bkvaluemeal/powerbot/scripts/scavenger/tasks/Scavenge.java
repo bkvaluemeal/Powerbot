@@ -1,6 +1,8 @@
 package net.bkvaluemeal.powerbot.scripts.scavenger.tasks;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.bkvaluemeal.powerbot.scripts.scavenger.Scavenger;
 import net.bkvaluemeal.powerbot.util.Task;
@@ -42,6 +44,8 @@ public class Scavenge extends Task {
 		}).nearest().poll();
 		long startTime = System.currentTimeMillis();
 		
+		Logger.getGlobal().log(Level.INFO, item.getName() + " ID: " + item.getId() + " " + item.getLocation());
+		
 		while(ctx.movement.isReachable(ctx.players.local().getLocation(), item.getLocation())
 				&& item.isValid()) {
 			
@@ -67,6 +71,17 @@ public class Scavenge extends Task {
 				ctx.camera.turnTo(item);
 			}
 		}
+		
+//		if(item.getId() == -1) {
+//			Scavenger.status = "Teleporting";
+//			
+//			if(ctx.widgets.get(1465).getComponent(10).interact("Teleport")) {
+//				sleep(Random.nextInt(250, 500));
+//				if(ctx.widgets.get(1092).getComponent(47).interact("Teleport")) {
+//					sleep(Random.nextInt(4000, 5000));
+//				}
+//			}
+//		}
 	}
 	
 }
