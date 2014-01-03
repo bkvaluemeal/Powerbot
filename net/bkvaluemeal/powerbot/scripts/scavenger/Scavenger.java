@@ -20,7 +20,7 @@ import org.powerbot.script.util.Random;
 
 public class Scavenger extends PollingScript implements PaintListener {
 	
-	private final BufferedImage MW2Scavenger = downloadImage("http://static4.wikia.nocookie.net/__cb20120121172947/callofduty/images/3/30/ScavengePro.png");
+	private final BufferedImage MW2Scavenger = downloadImage("http://static2.wikia.nocookie.net/__cb20120121172947/callofduty/images/thumb/3/30/ScavengePro.png/100px-ScavengePro.png");
 	private ArrayList<Task> taskList = new ArrayList<>();
 	private final long startTime = System.currentTimeMillis();
 	private long runTime = 0L;
@@ -91,15 +91,15 @@ public class Scavenger extends PollingScript implements PaintListener {
 		
 		/* Menu */
 		g.setColor(Color.DARK_GRAY);
-		g.fillRoundRect(5, 5, 300, 125, 10, 10);
+		g.fillRoundRect(5, 5, 250, 89, 10, 10);
 		g.setColor(Color.WHITE);
-		g.drawRoundRect(5, 5, 300, 125, 10, 10);
-		g.drawImage(MW2Scavenger, 0, 0, null);
+		g.drawRoundRect(5, 5, 250, 89, 10, 10);
+		g.drawImage(MW2Scavenger, 2, 2, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-		g.drawString("Time: " + time(), 135, 25);
-		g.drawString("Count: " + count(), 135, 40);
-		g.drawString("Profit: " + profit(), 135, 55);
-		g.drawString("Status: " + status, 135, 85);
+		g.drawString("Time: " + time(), 100, 25);
+		g.drawString("Count: " + count(), 100, 40);
+		g.drawString("Profit: " + profit(), 100, 55);
+		g.drawString("Status: " + status, 100, 85);
 		
 		/* Mouse */
 		g.drawLine(mouse.x, mouse.y - 5, mouse.x, mouse.y + 5);
