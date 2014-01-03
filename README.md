@@ -6,6 +6,7 @@ Scavenger v0.5.1 - Picks up dropped items and banks them
 
 ```
 Scavenger change log
+	v0.5.2 - Added a distance check
 	v0.5.1 - Added teleport override
 	v0.4.2 - Added to the paint
 	v0.4.1 - Added the count

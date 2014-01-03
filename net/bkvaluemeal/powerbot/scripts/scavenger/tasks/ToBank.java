@@ -17,7 +17,7 @@ public class ToBank extends Task {
 		return ctx.backpack.select().count() == 28
 				&& ctx.players.local().getAnimation() == -1
 				&& !ctx.players.local().isInCombat()
-				&& !ctx.bank.isOnScreen();
+				&& ctx.players.local().getLocation().distanceTo(ctx.bank.getNearest()) > 5.0D;
 	}
 	
 	@Override

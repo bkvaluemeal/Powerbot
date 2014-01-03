@@ -31,7 +31,8 @@ public class Scavenger extends PollingScript implements PaintListener {
 	
 	@Override
 	public void start() {
-		Scavenge.badItems.add(15412);
+		Scavenge.badItems.add(15412);	// Super large egg
+		Scavenge.badItems.add(1944);	// Eggs
 		taskList.add(new Scavenge(ctx));
 		taskList.add(new ToBank(ctx));
 		taskList.add(new Bank(ctx));
