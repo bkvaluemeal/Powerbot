@@ -45,7 +45,10 @@ public class Scavenge extends Task {
 		}).nearest().poll();
 		long startTime = System.currentTimeMillis();
 		
-		Logger.getGlobal().log(Level.INFO, item.getName() + " ID: " + item.getId() + " " + item.getLocation());
+		Logger.getGlobal().log(Level.INFO, item.getName()
+				+ " ID: " + item.getId()
+				+ " " + item.getLocation()
+				+ " " + ctx.players.local().getLocation().distanceTo(item.getLocation()));
 		
 		while(ctx.movement.isReachable(ctx.players.local().getLocation(), item.getLocation())
 				&& item.isValid()) {
@@ -55,7 +58,8 @@ public class Scavenge extends Task {
 				break;
 			}
 			
-			if(item.isOnScreen()) {
+			if(ctx.players.local().getLocation().distanceTo(item.getLocation()) <= 5.0D && 
+					item.isOnScreen()) {
 				if(item.interact("Take")) {
 					sleep(500);
 					while(ctx.players.local().isInMotion()) {
