@@ -9,6 +9,7 @@ import net.bkvaluemeal.powerbot.util.Task;
 
 import org.powerbot.script.lang.Filter;
 import org.powerbot.script.methods.MethodContext;
+import org.powerbot.script.util.Random;
 import org.powerbot.script.wrappers.GroundItem;
 
 public class Scavenge extends Task {
@@ -72,16 +73,17 @@ public class Scavenge extends Task {
 			}
 		}
 		
-//		if(item.getId() == -1) {
-//			Scavenger.status = "Teleporting";
-//			
-//			if(ctx.widgets.get(1465).getComponent(10).interact("Teleport")) {
-//				sleep(Random.nextInt(250, 500));
-//				if(ctx.widgets.get(1092).getComponent(47).interact("Teleport")) {
-//					sleep(Random.nextInt(4000, 5000));
-//				}
-//			}
-//		}
+		if(item.getId() == -1) {
+			Scavenger.status = "Teleporting";
+			
+			if(ctx.widgets.get(1465).getComponent(10).interact("Teleport")) {
+				sleep(Random.nextInt(1000, 2000));
+				if(ctx.widgets.get(1092).getComponent(47).interact("Teleport")) {
+					sleep(Random.nextInt(18000, 20000));
+					item = ctx.groundItems.select().nearest().poll();
+				}
+			}
+		}
 	}
 	
 }
