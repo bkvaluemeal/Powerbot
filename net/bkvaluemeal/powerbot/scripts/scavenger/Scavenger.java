@@ -40,6 +40,8 @@ public class Scavenger extends PollingScript implements PaintListener {
 	
 	@Override
 	public int poll() {
+		ctx.camera.setPitch(true);
+		
 		for (Task task : taskList) {
 			if(task.validate()) {
 				task.execute();

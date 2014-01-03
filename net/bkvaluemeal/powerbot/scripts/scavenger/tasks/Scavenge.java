@@ -50,6 +50,18 @@ public class Scavenge extends Task {
 				+ " " + item.getLocation()
 				+ " " + ctx.players.local().getLocation().distanceTo(item.getLocation()));
 		
+		if(item.getId() == -1) {
+			Scavenger.status = "Teleporting";
+			
+			if(ctx.widgets.get(1465).getComponent(10).interact("Teleport")) {
+				sleep(Random.nextInt(1000, 2000));
+				if(ctx.widgets.get(1092).getComponent(47).interact("Teleport")) {
+					sleep(Random.nextInt(18000, 20000));
+					item = ctx.groundItems.select().nearest().poll();
+				}
+			}
+		}
+		
 		while(ctx.movement.isReachable(ctx.players.local().getLocation(), item.getLocation())
 				&& item.isValid()) {
 			
@@ -74,18 +86,6 @@ public class Scavenge extends Task {
 					}
 				}
 				ctx.camera.turnTo(item);
-			}
-		}
-		
-		if(item.getId() == -1) {
-			Scavenger.status = "Teleporting";
-			
-			if(ctx.widgets.get(1465).getComponent(10).interact("Teleport")) {
-				sleep(Random.nextInt(1000, 2000));
-				if(ctx.widgets.get(1092).getComponent(47).interact("Teleport")) {
-					sleep(Random.nextInt(18000, 20000));
-					item = ctx.groundItems.select().nearest().poll();
-				}
 			}
 		}
 	}
