@@ -9,6 +9,8 @@ import net.bkvaluemeal.powerbot.util.Task;
 
 public class Bank extends Task {
 	
+	private GeItem item;
+	
 	public Bank(MethodContext ctx) {
 		super(ctx);
 	}
@@ -19,7 +21,7 @@ public class Bank extends Task {
 				&& ctx.players.local().getAnimation() == -1
 				&& !ctx.players.local().isInCombat()
 				&& ctx.bank.isOnScreen()
-				&& ctx.players.local().getLocation().distanceTo(ctx.bank.getNearest()) <= 5.0D;
+				&& ctx.players.local().getLocation().distanceTo(ctx.bank.getNearest()) <= 2.0D;
 	}
 	
 	@Override
@@ -34,10 +36,15 @@ public class Bank extends Task {
 		
 		for(Item i : inventory) {
 			Scavenger.status = "Updating profit";
-			GeItem price = GeItem.getProfile(i.getId());
 			
-			if(price != null) {
-				Scavenger.profit = GeItem.getProfile(i.getId()).getPrice(GeItem.PriceType.CURRENT).getPrice() + Scavenger.profit;
+			try {
+				item = GeItem.getProfile(i.getId());
+			} catch(Exception e) {
+				item = null;
+			}
+			
+			if(item != null) {
+				Scavenger.profit = item.getPrice(GeItem.PriceType.CURRENT).getPrice() + Scavenger.profit;
 			}
 		}
 	}

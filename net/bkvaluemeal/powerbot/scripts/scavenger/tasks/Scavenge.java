@@ -70,7 +70,7 @@ public class Scavenge extends Task {
 				break;
 			}
 			
-			if(ctx.players.local().getLocation().distanceTo(item.getLocation()) <= 5.0D && 
+			if(ctx.players.local().getLocation().distanceTo(item.getLocation()) <= 2.0D && 
 					item.isOnScreen()) {
 				if(item.interact("Take")) {
 					sleep(500);
